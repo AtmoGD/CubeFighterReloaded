@@ -9,18 +9,48 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     private float speed = 3f;
 
-    public void Move(InputAction.CallbackContext _context)
+    [SerializeField]
+    private float rotationSpeed = 3f;
+
+    private float moveDir { get; set; }
+    public float MoveDir
     {
-        Vector3 dir = _context.ReadValue<Vector2>();
-        Vector3 newPos = transform.position + (new Vector3(dir.x, 0, dir.y) * speed * Time.deltaTime);
+        get { return moveDir; }
+        set { moveDir = value; }
+    }
+    
+    private Vector3 rotationDir { get; set; }
+    public Vector3 RotationDir
+    {
+        get { return rotationDir != null ? rotationDir : new Vector3(); }
+        private set { rotationDir = value; }
+    }
+
+    public void FixedUpdate()
+    {
+        Move();
+        Rotate();
+    }
+
+    public void Move()
+    {
+        Vector3 newPos = transform.position + (transform.forward * moveDir * speed * Time.deltaTime);
         transform.position = newPos;
     }
 
-    public void Rotate(InputAction.CallbackContext _context)
+    public void Rotate()
     {
-        // Vector3 dir = _context.ReadValue<Vector2>();
-        // Vector3 lookAtPos = transform.position + cam.forward;
-        // lookAtPos.y = transform.position.y;
-        // transform.LookAt(lookAtPos);
+        Vector3 lookAtPos = transform.position + (RotationDir * rotationSpeed * Time.deltaTime);
+        transform.LookAt(lookAtPos);
+    }
+    public void OnMove(InputAction.CallbackContext _context)
+    {
+        moveDir = _context.ReadValue<Vector2>().y;
+    }
+
+    public void OnRotate(InputAction.CallbackContext _context)
+    {
+        Vector2 dir = _context.ReadValue<Vector2>();
+        RotationDir = new Vector3(dir.x, 0, dir.y);
     }
 }
