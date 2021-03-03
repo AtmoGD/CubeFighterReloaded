@@ -12,13 +12,8 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 3f;
 
-    private float moveDir { get; set; }
-    public float MoveDir
-    {
-        get { return moveDir; }
-        set { moveDir = value; }
-    }
-    
+    public float MoveDir { get; private set; }
+
     private Vector3 rotationDir { get; set; }
     public Vector3 RotationDir
     {
@@ -34,18 +29,25 @@ public class MovementController : MonoBehaviour
 
     public void Move()
     {
-        Vector3 newPos = transform.position + (transform.forward * moveDir * speed * Time.deltaTime);
+        Vector3 newPos = transform.position + (transform.forward * MoveDir * speed * Time.deltaTime);
         transform.position = newPos;
     }
 
     public void Rotate()
     {
-        Vector3 lookAtPos = transform.position + (RotationDir * rotationSpeed * Time.deltaTime);
-        transform.LookAt(lookAtPos);
+        Quaternion targetDir = Quaternion.LookRotation((transform.position + RotationDir) - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetDir, rotationSpeed * Time.deltaTime);
+
+        // float angle = Vector3.Angle(transform.forward, RotationDir);
+        // Vector3 rot = transform.rotation.eulerAngles;
+        // rot.y += (angle * rotationSpeed * Time.deltaTime);
+        // transform.rotation = Quaternion.Euler(rot);
+        // Vector3 lookAtPos = transform.position + (RotationDir * rotationSpeed * Time.deltaTime);
+        // transform.LookAt(lookAtPos);
     }
     public void OnMove(InputAction.CallbackContext _context)
     {
-        moveDir = _context.ReadValue<Vector2>().y;
+        MoveDir = _context.ReadValue<Vector2>().y;
     }
 
     public void OnRotate(InputAction.CallbackContext _context)
