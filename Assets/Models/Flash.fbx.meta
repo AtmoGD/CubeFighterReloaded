@@ -1,8 +1,14 @@
 fileFormatVersion: 2
-guid: a00a2c4466069934bbf0bb086f66d036
+guid: 156c8c926d82937438b28bac2da3500b
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -3469751248789777571
+    second: Cube|Jump
+  - first:
+      74: 1310701402857357087
+    second: Cube|JumpDash
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -59,7 +65,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

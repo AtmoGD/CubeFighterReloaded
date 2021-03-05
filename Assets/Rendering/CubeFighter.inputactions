@@ -22,12 +22,20 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Fire",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "df38d19e-852d-4713-b101-58c8037f9bcc",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "23a5192d-5feb-4eca-a5cc-ad94dae244a8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -199,11 +207,11 @@
                 {
                     "name": "",
                     "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Fire",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -214,40 +222,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Fire",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
-                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "id": "9bab84a5-2f23-4233-8a97-914d40788dff",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Touch",
-                    "action": "Fire",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "ee3d0cd2-254e-47a7-a8cb-bc94d9658c54",
-                    "path": "<Joystick>/trigger",
+                    "id": "d1900bd8-dfa2-4983-94b6-6fe39f710ef8",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8255d333-5683-4943-a58a-ccb207ff1dce",
-                    "path": "<XRController>/{PrimaryAction}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XR",
-                    "action": "Fire",
+                    "groups": "Gamepad",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
