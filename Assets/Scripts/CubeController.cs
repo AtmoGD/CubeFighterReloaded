@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CubeController : MonoBehaviour
 {
+    public Action Dashing;
+    public Action Jumping;
+    public Action Idle;
+
     [SerializeField] Transform cam = null;
     [SerializeField] private float velocity = 20f;
     [SerializeField] private float maxSpeed = 30f;
@@ -96,15 +101,16 @@ public class CubeController : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce * forceMultiplier, ForceMode.Force);
         StartCoroutine(JumpCooldown());
+        Jumping?.Invoke();
     }
 
     public void OnDash(InputAction.CallbackContext _context)
     {
         if (!canDash) return;
 
-        Debug.Log("Dash");
         rb.AddForce(transform.forward * dashForce * forceMultiplier, ForceMode.Force);
         StartCoroutine(DashCooldown());
+        Dashing?.Invoke();
     }
 
     public void Move(float _magnitude)
@@ -138,6 +144,7 @@ public class CubeController : MonoBehaviour
         canJump = false;
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
+        Idle?.Invoke();
     }
 
     IEnumerator DashCooldown()
@@ -146,6 +153,7 @@ public class CubeController : MonoBehaviour
         isDashing = true;
         yield return new WaitForSeconds(dashTime);
         isDashing = false;
+        Idle?.Invoke();
         yield return new WaitForSeconds(dashCooldown - dashTime);
         canDash = true;
     }
